@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
 	struct sockaddr_in serv_adr;
 	struct sockaddr_in cli_adr;
-	socklen_t cInt_adr_sz;
+	socklen_t cli_adr_sz;
 
 	if(argc != 2){
 		printf("Usage : %s <port>\n", argv[0]);
