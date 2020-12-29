@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	int str_len, i;
 
 	struct sockaddr_in serv_adr;
-	struct sockaddr_in cInt_adr;
+	struct sockaddr_in cli_adr;
 	socklen_t cInt_adr_sz;
 
 	if(argc != 2){
@@ -35,21 +35,21 @@ int main(int argc, char* argv[])
 	if(bind(serv_sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1)
 		error_handling("bind() error");
 
-	cInt_adr_sz = sizeof(cInt_adr);
+	cInt_adr_sz = sizeof(cli_adr);
 
 	for(i = 0; i<5; i++)
 	{
-		cInt_sock = accept(serv_sock, (struct sockaddr*)&cInt_adr, &cInt_adr_sz);
-		if(cInt_sock == -1)
+		cInt_sock = accept(serv_sock, (struct sockaddr*)&cli_adr, &cli_adr_sz);
+		if(cli_sock == -1)
 			error_handling("accept() error");
 		else
 			printf("Connected client %d \n", i + 1);
 
-		printf("Client IP : %s, PORTNO : %d\n", inet_ntoa(cInt_adr.sin_addr), cInt_adr.sin_port);
-		while((str_len = read(cInt_sock, message, BUF_SIZE)) != 0)
-			write(cInt_sock, message, str_len);
+		printf("Client IP : %s, PORTNO : %d\n", inet_ntoa(cli_adr.sin_addr), cli_adr.sin_port);
+		while((str_len = read(cli_sock, message, BUF_SIZE)) != 0)
+			write(cli_sock, message, str_len);
 
-		close(cInt_sock);
+		close(cli_sock);
 	}
 
 	close(serv_sock);
