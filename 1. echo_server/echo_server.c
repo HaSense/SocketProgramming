@@ -10,7 +10,7 @@ void error_handling(char *message);
 
 int main(int argc, char* argv[])
 {
-	int serv_sock, cInt_sock;
+	int serv_sock, cli_sock;
 	char message[BUF_SIZE];
 	int str_len, i;
 
